@@ -34,7 +34,7 @@ const BillingDashboard = () => {
 
 
     if (status === 'fetching') {
-        return <div>Loading...</div>
+        return <h1>Loading...</h1>
     }
 
     return (
@@ -47,7 +47,7 @@ const BillingDashboard = () => {
             </ol>
             <h1>Bill Items</h1>
             <ol>
-                {billItems.map((item, index) => (
+                {billItems.map(item => (
                     <li key={item.product.id}>
                         {item.product.name} -
                         {item.quantity} * {item.product.selling_price} -
@@ -55,8 +55,8 @@ const BillingDashboard = () => {
                         {item.sgst} -
                         {item.total} -
 
-                        <button onClick={() => { dispatch(increaseQuantity({ index })) }}>+</button>
-                        <button onClick={() => { dispatch(decreaseQuantity({ index })) }}>-</button>
+                        <button onClick={() => { dispatch(increaseQuantity({ productId: item.product.id })) }}>+</button>
+                        <button onClick={() => { dispatch(decreaseQuantity({ productId: item.product.id })) }}>-</button>
                     </li>
                 ))}
             </ol>

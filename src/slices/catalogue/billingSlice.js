@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
  * Initial billingSlice State 
  */
 const initialState = {
+    id: '',
     customer: {},   // In this form {id: 1, name: 'John', email: '', phone: '8569915577'}
     items: [],      // In this form [{product: {}, cgst: 100, sgst: 150, quantity: 0, total: 0}]
 };
@@ -28,9 +29,9 @@ const billingSlice = createSlice({
                     state.items[_index].cgst += _item.product.tax.cgst * _item.product.selling_price
                     state.items[_index].sgst += _item.product.tax.sgst * _item.product.selling_price
 
-                    state.items[_index].total = (_item.product.selling_price * _item.quantity) + _item.cgst + _item.sgst;
+                    state.items[_index].total += _item.product.selling_price;
                 } else {
-                    alert('Out of stock');
+                    console.log('Out of stock');
                 }
             } else {
                 state.items.push({
@@ -38,7 +39,7 @@ const billingSlice = createSlice({
                     cgst: product.tax.cgst * product.selling_price,
                     sgst: product.tax.sgst * product.selling_price,
                     quantity: 1,
-                    total: product.selling_price + (product.tax.cgst * product.selling_price) + (product.tax.sgst * product.selling_price),
+                    total: product.selling_price,
                 });
             }
         },
@@ -46,42 +47,52 @@ const billingSlice = createSlice({
         // action to increase the item quantity
         // send index of the item as payload
         increaseQuantity: (state, action) => {
-            const { index } = action.payload;
+            const { productId } = action.payload;
 
-            if (state.items[index].product.quantity - state.items[index].quantity > 0) {
-                state.items[index].quantity++;
+            const _item = state.items.find(item => item.product.id === productId);
+            if (_item) {
+                const _index = state.items.indexOf(_item);
 
-                const cgst = state.items[index].product.tax.cgst * state.items[index].product.selling_price;
-                const sgst = state.items[index].product.tax.sgst * state.items[index].product.selling_price;
+                if (_item.product.quantity - _item.quantity > 0) {
 
-                state.items[index].cgst += cgst;
-                state.items[index].sgst += sgst;
-                state.items[index].total += state.items[index].product.selling_price + cgst + sgst;
+                    state.items[_index].quantity++;
+                    state.items[_index].cgst += _item.product.tax.cgst * _item.product.selling_price;
+                    state.items[_index].sgst += _item.product.tax.sgst * _item.product.selling_price;
+                    state.items[_index].total += _item.product.selling_price;
+                } else {
+                    console.log('Out of stock');
+                }
             } else {
-                alert('Out of stock');
+                console.log('Item not found');
             }
         },
 
         // action to decrease the item quantity
         // send index of the item as payload
         decreaseQuantity: (state, action) => {
-            const { index } = action.payload;
+            const { productId } = action.payload;
 
-            if (state.items[index].quantity > 0) {
-                const cgst = state.items[index].product.tax.cgst * state.items[index].product.selling_price;
-                const sgst = state.items[index].product.tax.sgst * state.items[index].product.selling_price;
+            const _item = state.items.find(item => item.product.id === productId);
 
-                state.items[index].cgst -= cgst;
-                state.items[index].sgst -= sgst;
-                state.items[index].total -= state.items[index].product.selling_price + cgst + sgst;
+            if (_item) {
+                const _index = state.items.indexOf(_item);
 
-                if (state.items[index].quantity === 1) {
-                    state.items.splice(index, 1);
+                if (_item.quantity > 0) {
+
+                    state.items[_index].cgst -= _item.product.tax.cgst * _item.product.selling_price;
+                    state.items[_index].sgst -= _item.product.tax.sgst * _item.product.selling_price;
+                    state.items[_index].total -= _item.product.selling_price;
+
+                    if (_item.quantity === 1) {
+                        state.items.splice(_index, 1);
+                    } else {
+                        state.items[_index].quantity--;
+                    }
                 } else {
-                    state.items[index].quantity--;
+                    console.log('Quantity cannot be less than 0');
                 }
             } else {
-                console.log('Quantity cannot be less than 0');
+                console.log('Item not found');
             }
         },
 
@@ -96,9 +107,10 @@ export const { addItem, increaseQuantity, decreaseQuantity } = billingSlice.acti
 
 /**
  * This will be used to select the value from the state in the component using the useSelector hook
- * @param {*} state 
  */
 export const selectBillItems = (state) => state.billing.items;
+export const selectBillCustomer = (state) => state.billing.customer;
+export const selectBillId = (state) => state.billing.id;
 
 /**
  * FInally Exporting the reducer from the billingSlice
