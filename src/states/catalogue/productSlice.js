@@ -1,3 +1,11 @@
+/**
+ *----------------------------@mit----------------------------
+ * This is the product slice that will responsible for
+ * fetching the product items from the server and 
+ * managing their state.
+ * -----------------------------------------------------------
+ */
+
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { fetchProducts } from './apis';
 
@@ -9,6 +17,7 @@ const initialState = {
     value: [],
     selected: null,
     status: 'idle',
+    error: null,
 };
 
 /**
@@ -44,6 +53,10 @@ const productSlice = createSlice({
             .addCase(fetchProductsAsync.fulfilled, (state, action) => {
                 state.status = 'idle';
                 state.value = action.payload;
+            })
+            .addCase(fetchProductsAsync.rejected, (state, action) => {
+                state.status = 'idle';
+                state.error = action.error;
             });
     },
 });
@@ -62,6 +75,7 @@ export const { select } = productSlice.actions;
 export const selectProducts = (state) => state.product.value;
 export const selectSelectedProduct = (state) => state.product.selected;
 export const selectProductLoadingStatus = (state) => state.product.status;
+export const selectProductError = (state) => state.product.error;
 
 /**
  * FInally Exporting the reducer from the productSlice

@@ -1,3 +1,9 @@
+/**
+ *----------------------------@mit----------------------------
+ * This is the billing slice that will responsible for
+ * holding the billing state of the pos app.
+ * -----------------------------------------------------------
+ */
 import { createSlice } from '@reduxjs/toolkit';
 
 /**
@@ -17,7 +23,7 @@ const billingSlice = createSlice({
     name: 'billing',
     initialState,
     reducers: {
-        // action to add a product to the billing items
+        // Action to add a product to the billing items
         addItem: (state, action) => {
             const { product } = action.payload;
             const _item = state.items.find(item => item.product.id === product.id);
@@ -44,8 +50,7 @@ const billingSlice = createSlice({
             }
         },
 
-        // action to increase the item quantity
-        // send index of the item as payload
+        // Action to increase the item quantity. Just send productId as payload
         increaseQuantity: (state, action) => {
             const { productId } = action.payload;
 
@@ -67,8 +72,7 @@ const billingSlice = createSlice({
             }
         },
 
-        // action to decrease the item quantity
-        // send index of the item as payload
+        // Action to decrease the item quantity. Just send productId as payload
         decreaseQuantity: (state, action) => {
             const { productId } = action.payload;
 
@@ -96,6 +100,18 @@ const billingSlice = createSlice({
             }
         },
 
+        // Action to set the customer. Just send the customer object as payload
+        setCustomer: (state, action) => {
+            const { customer } = action.payload;
+            state.customer = customer;
+        },
+
+        // Action to set the billing id. Just send the id as payload
+        setBillingId: (state, action) => {
+            const { id } = action.payload;
+            state.id = id;
+        }
+
     },
 });
 
@@ -103,7 +119,7 @@ const billingSlice = createSlice({
 /**
  * Exporting the actions from the billingSlice
  */
-export const { addItem, increaseQuantity, decreaseQuantity } = billingSlice.actions;
+export const { addItem, increaseQuantity, decreaseQuantity, setCustomer, setBillingId } = billingSlice.actions;
 
 /**
  * This will be used to select the value from the state in the component using the useSelector hook

@@ -1,3 +1,11 @@
+/**
+ *----------------------------@mit----------------------------
+ * This is the category slice that will responsible for
+ * fetching the category items from the server and 
+ * managing their state.
+ * -----------------------------------------------------------
+ */
+
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { fetchCategories } from './apis';
 
@@ -8,6 +16,7 @@ const initialState = {
     value: [],
     selected: null,
     status: 'idle',
+    error: null,
 };
 
 /**
@@ -43,6 +52,10 @@ const categorySlice = createSlice({
             .addCase(fetchCategoriesAsync.fulfilled, (state, action) => {
                 state.status = 'idle';
                 state.value = action.payload;
+            })
+            .addCase(fetchCategoriesAsync.rejected, (state, action) => {
+                state.status = 'idle';
+                state.error = action.error;
             });
     },
 });
@@ -61,6 +74,7 @@ export const { select } = categorySlice.actions;
 export const selectCategories = (state) => state.category.value;
 export const selectSelectedCategory = (state) => state.category.selected;
 export const selectCategoryLoadingStatus = (state) => state.category.status;
+export const selectCategoryError = (state) => state.category.error;
 
 /**
  * FInally Exporting the reducer from the categorySlice

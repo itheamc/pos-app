@@ -1,4 +1,15 @@
 /**
+ *----------------------------@mit----------------------------
+ * This file will consists all the networking related functions
+ * regarding catalogue that will be used by the slices to retrieve 
+ * category, products and other catalogue related data from 
+ * the server.
+ * -----------------------------------------------------------
+ */
+import { get, post, put, del } from '../../networking_handlers/request_handlers'
+import EndPoints from '../../networking_handlers/endpoints'
+
+/**
  * FUnction to fetch the categories from the server
  * @returns {Promise<{data: []}>}
  */
@@ -38,3 +49,55 @@ export function fetchProducts() {
         }), 2500)
     );
 }
+
+
+/**
+ * Function to fetch products from the server
+ * @returns {Promise<{data: []}>}
+ */
+// export function fetchProducts() {
+//     return new Promise((resolve, reject) => {
+//         get(EndPoints.product.list)
+//             .then(res => {
+//                 resolve(res);
+//             })
+//             .catch(err => {
+//                 reject(err);
+//             });
+//     });
+// }
+
+
+/**
+ * Function to fetch categories from the server
+ * @returns {Promise<{data: []}>}
+ */
+// export function fetchCategories() {
+//     return new Promise((resolve, reject) => {
+//         get(EndPoints.category.list)
+//             .then(res => {
+//                 resolve(res);
+//             })
+//             .catch(err => {
+//                 reject(err);
+//             });
+//     });
+// }
+
+
+/**
+ * Function to fetch products by category from the server
+ * @param categoryId - category id
+ * @returns {Promise<{data: []}>}
+ */
+// export function fetchProductsByCategory(categoryId) {
+//     return new Promise((resolve, reject) => {
+//        get(EndPoints.category.get + `?category_id=${categoryId}`)
+//             .then(res => {
+//                 resolve(res);
+//             })
+//             .catch(err => {
+//                 reject(err);
+//             });
+//     });
+// }
