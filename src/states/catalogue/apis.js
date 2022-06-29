@@ -56,15 +56,7 @@ export function fetchProducts() {
  * @returns {Promise<{data: []}>}
  */
 // export function fetchProducts() {
-//     return new Promise((resolve, reject) => {
-//         get(EndPoints.product.list)
-//             .then(res => {
-//                 resolve(res);
-//             })
-//             .catch(err => {
-//                 reject(err);
-//             });
-//     });
+//     return get(EndPoints.product.list)
 // }
 
 
@@ -73,15 +65,7 @@ export function fetchProducts() {
  * @returns {Promise<{data: []}>}
  */
 // export function fetchCategories() {
-//     return new Promise((resolve, reject) => {
-//         get(EndPoints.category.list)
-//             .then(res => {
-//                 resolve(res);
-//             })
-//             .catch(err => {
-//                 reject(err);
-//             });
-//     });
+//     return get(EndPoints.category.list)
 // }
 
 
@@ -91,13 +75,5 @@ export function fetchProducts() {
  * @returns {Promise<{data: []}>}
  */
 // export function fetchProductsByCategory(categoryId) {
-//     return new Promise((resolve, reject) => {
-//        get(EndPoints.category.get + `?category_id=${categoryId}`)
-//             .then(res => {
-//                 resolve(res);
-//             })
-//             .catch(err => {
-//                 reject(err);
-//             });
-//     });
+//     return get(EndPoints.category.get + `?category_id=${categoryId}`)
 // }

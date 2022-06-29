@@ -41,7 +41,6 @@ export const updateUserAsync = createAsyncThunk(
 );
 
 
-
 /**
  * Creating userSice to handle the users state
  */

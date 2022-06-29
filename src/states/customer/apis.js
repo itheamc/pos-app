@@ -38,16 +38,7 @@ export function fetchCustomers() {
  * @returns {Promise<{data: {}}>}
  */
 export function addCustomer(customer) {
-    return new Promise((resolve, reject) => {
-        post(EndPoints.customer.add, customer)
-            .then(res => {
-                resolve(res);
-            })
-            .catch(err => {
-                reject(err);
-            });
-
-    });
+    return post(EndPoints.customer.add, customer)
 }
 
 /**
@@ -56,16 +47,7 @@ export function addCustomer(customer) {
  * @returns {Promise<{data: {}}>}
  */
 export function updateCustomer(customer) {
-    return new Promise((resolve, reject) => {
-        put(EndPoints.customer.update + customer.id, customer)
-            .then(res => {
-                resolve(res);
-            })
-            .catch(err => {
-                reject(err);
-            });
-
-    });
+    return put(EndPoints.customer.update + customer.id, customer)
 }
 
 /**
@@ -74,16 +56,7 @@ export function updateCustomer(customer) {
  * @returns {Promise<{data: {}}>}
  */
 export function deleteCustomer(customer) {
-    return new Promise((resolve, reject) => {
-        del(EndPoints.customer.delete + customer.id)
-            .then(res => {
-                resolve(res);
-            })
-            .catch(err => {
-                reject(err);
-            });
-
-    });
+    return del(EndPoints.customer.delete + customer.id)
 }
 
 /**
@@ -91,13 +64,5 @@ export function deleteCustomer(customer) {
  * @returns {Promise<{data: []}>}
  */
 // export function fetchCustomers() {
-//     return new Promise((resolve, reject) => {
-//         get(EndPoints.customer.list)
-//             .then(res => {
-//                 resolve(res);
-//             })
-//             .catch(err => {
-//                 reject(err);
-//             });
-//     });
+//     return get(EndPoints.customer.list)
 // }

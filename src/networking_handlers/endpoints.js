@@ -56,7 +56,9 @@ const EndPoints = {
         add: '/staff',
         update: '/staff',
         delete: '/staff',
-    }
+    },
+    LOGIN_USER: '/store/login',
+    GET_ACCESS_TOKEN: '/get_token'
 };
 
 export default EndPoints

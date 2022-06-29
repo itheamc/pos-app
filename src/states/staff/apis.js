@@ -14,15 +14,7 @@ import EndPoints from '../../networking_handlers/endpoints'
  * @returns {Promise<{data: []}>}
  */
 export function fetchStaffs() {
-    return new Promise((resolve, reject) => {
-        get(EndPoints.staff.list)
-            .then(res => {
-                resolve(res);
-            })
-            .catch(err => {
-                reject(err);
-            });
-    });
+    return get(EndPoints.staff.list)
 }
 
 
@@ -32,15 +24,7 @@ export function fetchStaffs() {
  * @returns {Promise<{data: {}}>}
  */
 export function addStaff(staff) {
-    return new Promise((resolve, reject) => {
-        post(EndPoints.staff.add, staff)
-            .then(res => {
-                resolve(res);
-            })
-            .catch(err => {
-                reject(err);
-            });
-    });
+    return post(EndPoints.staff.add, staff)
 }
 
 
@@ -50,15 +34,7 @@ export function addStaff(staff) {
  * @returns {Promise<{data: {}}>}
  */
 export function updateStaff(staff) {
-    return new Promise((resolve, reject) => {
-        put(EndPoints.staff.update + `/${staff.id}`, staff)
-            .then(res => {
-                resolve(res);
-            })
-            .catch(err => {
-                reject(err);
-            });
-    });
+    return put(EndPoints.staff.update + `/${staff.id}`, staff)
 }
 
 
@@ -68,13 +44,5 @@ export function updateStaff(staff) {
  * @returns {Promise<{data: {}}>}
  */
 export function deleteStaff(staff) {
-    return new Promise((resolve, reject) => {
-        del(EndPoints.staff.delete + `/${staff.id}`)
-            .then(res => {
-                resolve(res);
-            })
-            .catch(err => {
-                reject(err);
-            });
-    });
+    return del(EndPoints.staff.delete + `/${staff.id}`)
 }

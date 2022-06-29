@@ -9,36 +9,32 @@ import { get, post, put, del } from '../../networking_handlers/request_handlers'
 import EndPoints from '../../networking_handlers/endpoints'
 
 
+
 /**
- * Function to fetch user from the server
- * @returns {Promise<{data: {}}>}
+ * @description: This function will be used to login the user
+ * @param {string} email
+ * @param {string} password
+ * @returns {Promise}
  */
-export function fetchUser() {
-    return new Promise((resolve, reject) => {
-        get(EndPoints.user.get)
-            .then(res => {
-                resolve(res);
-            })
-            .catch(err => {
-                reject(err);
-            });
-    });
+export function loginUser(email, password) {
+    return post(EndPoints.LOGIN_USER, { email, password })
 }
 
 
 /**
- * Function to update user to the server
+ * @description: This function will be used to fetch user from the server
+ * @returns {Promise<{data: {}}>}
+ */
+export function fetchUser() {
+    return get(EndPoints.user.get)
+}
+
+
+/**
+ * @description: This function will be used to update user to the server
  * @param user - user object
  * @returns {Promise<{data: {}}>}
  */
 export function updateUser(user) {
-    return new Promise((resolve, reject) => {
-        put(EndPoints.user.update + `/${user.id}`, user)
-            .then(res => {
-                resolve(res);
-            })
-            .catch(err => {
-                reject(err);
-            });
-    });
+    return put(EndPoints.user.update + `/${user.id}`, user)
 }

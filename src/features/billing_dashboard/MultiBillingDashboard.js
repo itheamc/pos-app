@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { selectProductLoadingStatus, selectProducts, fetchProductsAsync } from '../../states/catalogue/productSlice'
 import { addItem } from '../../states/multi_billings/billingsSlice'
 import BillingItems from '../components/BillingItems'
+import BillingTabs from '../components/BillingTabs'
 
 
 
@@ -33,6 +34,7 @@ const MultiBillingDashboard = () => {
 
     return (
         <div>
+            <BillingTabs />
             <h1>Products</h1>
             <input type="text" value={bill_Id} onChange={(e) => setBill_Id(e.target.value)} />
             <ol>

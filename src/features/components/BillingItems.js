@@ -23,7 +23,7 @@ const BillingItems = (props) => {
 
     return (
         <div>
-            <h1>Billing Items</h1>
+            <h1>Billing Items (Bill Id: {bill_Id})</h1>
             <ol>
                 {_items.map(item => (
                     <li key={item.product.id}>

@@ -31,16 +31,7 @@ export function fetchVendors() {
  * @returns {Promise<{data: {}}>}
  */
 export function addVendor(vendor) {
-    return new Promise((resolve, reject) => {
-        post(EndPoints.vendor.add, vendor)
-            .then(res => {
-                resolve(res);
-            })
-            .catch(err => {
-                reject(err);
-            });
-
-    });
+    return post(EndPoints.vendor.add, vendor)
 }
 
 
@@ -50,16 +41,7 @@ export function addVendor(vendor) {
  * @returns {Promise<{data: {}}>}
  */
 export function updateVendor(vendor) {
-    return new Promise((resolve, reject) => {
-        put(EndPoints.vendor.update + `/${vendor.id}`, vendor)
-            .then(res => {
-                resolve(res);
-            })
-            .catch(err => {
-                reject(err);
-            });
-
-    });
+    return put(EndPoints.vendor.update + `/${vendor.id}`, vendor)
 }
 
 
@@ -69,16 +51,7 @@ export function updateVendor(vendor) {
  * @returns {Promise<{data: {}}>}
  */
 export function deleteVendor(vendor) {
-    return new Promise((resolve, reject) => {
-        del(EndPoints.vendor.delete + `/${vendor.id}`)
-            .then(res => {
-                resolve(res);
-            })
-            .catch(err => {
-                reject(err);
-            });
-
-    });
+    return del(EndPoints.vendor.delete + `/${vendor.id}`)
 }
 
 
@@ -87,14 +60,5 @@ export function deleteVendor(vendor) {
  * @returns {Promise<{data: []}>}
  */
 // export function fetchVendors() {
-//     return new Promise((resolve, reject) => {
-//         get(EndPoints.vendor.list)
-//             .then(res => {
-//                 resolve(res);
-//             })
-//             .catch(err => {
-//                 reject(err);
-//             });
-
-//     });
+//     return get(EndPoints.vendor.list)
 // }

@@ -4,15 +4,27 @@
  * -----------------------------------------------------------
  */
 import axios from 'axios';
+import { errorHandler } from './errors_handler';
 
 
 /**
  * Base Url
  */
-const baseUrl = 'http://localhost:8000';
+const baseUrl = 'http://localhost:8000/api/v1';
 const access_token = localStorage.getItem('access_token');
-const refresh_token = localStorage.getItem('refresh_token');
 const bearer_token = 'Bearer ' + access_token;
+
+
+/**
+ * @description: This is an instance of axios
+ */
+const axios_instance = axios.create({
+    baseURL: baseUrl,
+    headers: {
+        'Authorization': bearer_token,
+        'Content-Type': 'application/json',
+    },
+});
 
 
 /**
@@ -22,11 +34,7 @@ const bearer_token = 'Bearer ' + access_token;
  */
 export function get(endpoint) {
     return new Promise((resolve, reject) => {
-        axios.get(baseUrl + endpoint, {
-            headers: {
-                Authorization: access_token
-            }
-        })
+        axios_instance.get(endpoint)
             .then(res => {
                 resolve(res);
             })
@@ -44,12 +52,9 @@ export function get(endpoint) {
  * @returns {Promise<{data: []}>}
  */
 export function post(endpoint, data) {
+    console.log(data);
     return new Promise((resolve, reject) => {
-        axios.post(baseUrl + endpoint, data, {
-            headers: {
-                Authorization: bearer_token
-            }
-        })
+        axios_instance.post(endpoint, data)
             .then(res => {
                 resolve(res);
             })
@@ -68,11 +73,7 @@ export function post(endpoint, data) {
  */
 export function put(endpoint, data) {
     return new Promise((resolve, reject) => {
-        axios.put(baseUrl + endpoint, data, {
-            headers: {
-                Authorization: bearer_token
-            }
-        })
+        axios_instance.put(endpoint, data)
             .then(res => {
                 resolve(res);
             })
@@ -90,11 +91,7 @@ export function put(endpoint, data) {
  */
 export function del(endpoint) {
     return new Promise((resolve, reject) => {
-        axios.delete(baseUrl + endpoint, {
-            headers: {
-                Authorization: bearer_token
-            }
-        })
+        axios_instance.delete(endpoint)
             .then(res => {
                 resolve(res);
             })
